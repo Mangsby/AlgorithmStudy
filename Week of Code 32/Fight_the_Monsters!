@@ -1,0 +1,32 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <queue>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n, hit, t;
+    priority_queue<int, vector<int>, greater<int>> q;
+    cin >> n >> hit >> t;
+    for(int i=0; i<n; i++) {
+        int h; cin >> h;
+        q.push(h);
+    }
+    int len = q.size();
+    int monster = q.top();
+    int count = 0;
+    q.pop();
+    while(!q.empty() && t > 0) { 
+        monster -= hit;
+        t--; 
+        if(monster <= 0) { 
+            count++;
+            monster = q.top();
+            q.pop();
+        }
+    }
+    cout << count;
+    return 0;
+}
